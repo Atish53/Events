@@ -1,0 +1,26 @@
+﻿@model Events.Models.EventCategory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EventCategory</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EventCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EventCategoryName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EventCategoryId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

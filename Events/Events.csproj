@@ -168,11 +168,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventBookingsController.cs" />
+    <Compile Include="Controllers\EventCategoriesController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111161251050_Ev.cs" />
+    <Compile Include="Migrations\202111161251050_Ev.Designer.cs">
+      <DependentUpon>202111161251050_Ev.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventBooking.cs" />
@@ -239,6 +247,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Events\Create.cshtml" />
+    <Content Include="Views\Events\Delete.cshtml" />
+    <Content Include="Views\Events\Details.cshtml" />
+    <Content Include="Views\Events\Edit.cshtml" />
+    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\EventCategories\Create.cshtml" />
+    <Content Include="Views\EventCategories\Delete.cshtml" />
+    <Content Include="Views\EventCategories\Details.cshtml" />
+    <Content Include="Views\EventCategories\Edit.cshtml" />
+    <Content Include="Views\EventCategories\Index.cshtml" />
+    <Content Include="Views\EventBookings\Create.cshtml" />
+    <Content Include="Views\EventBookings\Delete.cshtml" />
+    <Content Include="Views\EventBookings\Details.cshtml" />
+    <Content Include="Views\EventBookings\Edit.cshtml" />
+    <Content Include="Views\EventBookings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -255,6 +278,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202111161251050_Ev.resx">
+      <DependentUpon>202111161251050_Ev.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
