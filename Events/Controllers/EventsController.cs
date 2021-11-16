@@ -49,8 +49,12 @@ namespace Events.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "EventId,EventTitle,EventPicture,EventName,EventDescription1,EventDescription2,EventLocation,StartDate,EndDate,EventPrice,TicketsRemaining,EventCategoryId,isActive")] Event @event)
+        public async Task<ActionResult> Create([Bind(Include = "EventId,EventTitle,EventPicture,EventName,EventDescription1,EventDescription2,EventLocation,StartDate,EndDate,EventPrice,TicketsRemaining,EventCategoryId,isActive")] Event @event ,HttpPostedFileBase img_upload)
         {
+            byte[] data;
+            data = new byte[img_upload.ContentLength];
+            img_upload.InputStream.Read(data, 0, img_upload.ContentLength);
+            @event.EventPicture = data;
             if (ModelState.IsValid)
             {
                 db.Events.Add(@event);

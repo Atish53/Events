@@ -38,10 +38,12 @@ namespace Events.Models
         public string EventLocation { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Start Date")]
         public string StartDate { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "End Date")]
         public string EndDate { get; set; }
 

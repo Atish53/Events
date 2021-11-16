@@ -3,6 +3,8 @@
     ViewBag.Title = "Register";
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 <h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -30,6 +32,48 @@
         </div>
     </div>
     <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.City, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.State, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.State, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PostalCode, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Country, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Country, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.PhoneNo, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.PhoneNo, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" class="btn btn-default" value="Register" />
         </div>
@@ -38,4 +82,41 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgcoQz4NEzdAQVXSq9NHhqN1dNWfat__8&libraries=places"></script>
+    <script type="text/javascript">
+        google.maps.event.addDomListener(window, 'load', function () {
+            var places = new google.maps.places.Autocomplete(document.getElementById('Address'));
+            google.maps.event.addListener(places, 'place_changed', function () {
+
+
+                var place = places.getPlace();
+                document.getElementById('Address').value = place.formatted_address;
+
+
+                var componentForm = {
+                    street_number: 'short_name',
+                    route: 'long_name',
+                    locality: 'long_name',
+                    administrative_area_level_1: 'short_name',
+                    country: 'long_name',
+                    postal_code: 'short_name'
+                };
+
+                var addressObj = {}
+
+                for (var i = 0; i < place.address_components.length; i++) {
+                    var addressType = place.address_components[i].types[0];
+                    if (componentForm[addressType]) {
+                        addressObj[addressType] = place.address_components[i][componentForm[addressType]]
+                    }
+                }
+
+                document.getElementById('City').value = addressObj.locality;
+                document.getElementById('State').value = addressObj.administrative_area_level_1;
+                document.getElementById('PostalCode').value = addressObj.postal_code;
+                document.getElementById('Country').value = addressObj.country;
+
+            });
+        });
+    </script>
 }
