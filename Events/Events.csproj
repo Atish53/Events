@@ -189,6 +189,7 @@
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -233,6 +234,7 @@
     <Content Include="Images\W2.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\2021grp40-21529840 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -303,6 +305,9 @@
     <Content Include="Views\Manage\MyEvents.cshtml" />
     <Content Include="Views\EventBookings\Details.cshtml" />
     <Content Include="Views\EventBookings\AlreadyConfirmed.cshtml" />
+    <Content Include="Views\Payment\Success.cshtml" />
+    <Content Include="Views\Payment\Cancelled.cshtml" />
+    <Content Include="Views\Payment\Notify.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

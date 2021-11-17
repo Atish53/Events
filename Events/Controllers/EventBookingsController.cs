@@ -28,8 +28,8 @@ namespace Events.Controllers
         }
 
         // GET: EventBookings
-        public async Task<ActionResult> AlreadyConfirmed()
-        {            
+        public ActionResult AlreadyConfirmed()
+        {
             return View();
         }
 

@@ -97,13 +97,17 @@
 </style>
 
 <h2 class="text-center">Event Details</h2>
-@if (Model.DateBooked.AsDateTime().Subtract(Model.Event.EndDate.AsDateTime()).TotalDays < 0)
+@if (Model.CheckInTime != null)
+{
+<h2 class="text-center text-warning">You've successfully checked in at @Model.Event.EventName on the @Model.CheckInTime.AsDateTime()</h2>
+}
+else if (Model.DateBooked.AsDateTime().Subtract(Model.Event.EndDate.AsDateTime()).TotalDays < 0)
 {
     <h2 class="text-center text-success">This Ticket is Still Valid</h2>
 }
 else
 {
-    <h2 class="text-center text-warning">This Ticket is No Longer Valid</h2>
+<h2 class="text-center text-danger">This Ticket is No Longer Valid</h2>
 }
 
 
@@ -118,7 +122,7 @@ else
             <h4>@Model.Event.EventDescription1</h4>
             <h4>@Model.Event.EventDescription2</h4>
 
-            <br />            
+            <br />
             <a href="@Url.Action(actionName: "Print", controllerName: "EventBookings", routeValues: new { id = Model.EventBookingId})" class="button"><i class="fa fa-shopping-cart"></i>Download Invoice</a>
         </div>
         <div class="column-33">
@@ -144,9 +148,9 @@ else
             <p>@Model.Event.EventDescription1</p>
             <br />
             @if (Model.DateBooked.AsDateTime().Subtract(Model.Event.EndDate.AsDateTime()).TotalDays < 0)
-            {
+{
                 <a href="@Url.Action(actionName: "QRCoder", controllerName: "EventBookings", routeValues: new { id = Model.EventBookingId})" class="button"><i class="fa fa-shopping-cart"></i>Print QR Code</a>
-            }
+}
             <br />
 
         </div>
