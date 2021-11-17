@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Events.Models;
+using System.Data.Entity;
 
 namespace Events.Controllers
 {
@@ -15,6 +16,10 @@ namespace Events.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+
+
+        private ApplicationDbContext db = new ApplicationDbContext();
+
 
         public ManageController()
         {
@@ -320,6 +325,12 @@ namespace Events.Controllers
             }
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
+        }
+
+        // GET: Events
+        public async Task<ActionResult> MyEvents()
+        {
+            return View(await db.EventBookings.ToListAsync());
         }
 
         protected override void Dispose(bool disposing)

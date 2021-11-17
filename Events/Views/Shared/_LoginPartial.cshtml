@@ -19,6 +19,10 @@
             </ul>
         </li>
     }
+    else
+    {
+        <li>@Html.ActionLink("View My Events", "MyEvents", "Manage")</li>
+    }
     <li>
         @Html.ActionLink("Hello " + User.Identity.GetName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
     </li>

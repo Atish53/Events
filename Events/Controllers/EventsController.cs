@@ -31,9 +31,16 @@ namespace Events.Controllers
         public async Task<ActionResult> Book(int id) //Event Booking - id is the Event Id... Booking is stored to the EventBookings Table
         {
             var vFirstName = User.Identity.GetName();          
+            var vAddress = User.Identity.GetAddress();          
+            var vPhone = User.Identity.GetPhoneNo();          
             string FirstName = vFirstName.ToString();            
+            string Address = vAddress.ToString();            
+            string Phone = vPhone.ToString();            
 
             EventBooking eventBooking = new EventBooking();
+            eventBooking.CustomerName = FirstName;
+            eventBooking.Address = Address;
+            eventBooking.PhoneNumber = Phone;
             eventBooking.CustomerName = FirstName;
             eventBooking.DateBooked = DateTime.Now.ToString();
 

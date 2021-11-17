@@ -46,6 +46,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="QRCoder, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QRCoder.1.4.1\lib\net40\QRCoder.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.Compression.Base, Version=19.3451.0.54, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Compression.Base.19.3.0.54\lib\net451\Syncfusion.Compression.Base.dll</HintPath>
     </Reference>
@@ -119,6 +124,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework">
@@ -280,7 +286,6 @@
     <Content Include="Views\EventCategories\Index.cshtml" />
     <Content Include="Views\EventBookings\Create.cshtml" />
     <Content Include="Views\EventBookings\Delete.cshtml" />
-    <Content Include="Views\EventBookings\Details.cshtml" />
     <Content Include="Views\EventBookings\Edit.cshtml" />
     <Content Include="Views\EventBookings\Index.cshtml" />
     <Content Include="Views\Events\Book.cshtml" />
@@ -291,6 +296,8 @@
     <Content Include="Views\EventComments\Details.cshtml" />
     <Content Include="Views\EventComments\Edit.cshtml" />
     <Content Include="Views\EventComments\Index.cshtml" />
+    <Content Include="Views\Manage\MyEvents.cshtml" />
+    <Content Include="Views\EventBookings\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

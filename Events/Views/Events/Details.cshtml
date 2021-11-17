@@ -110,8 +110,8 @@
             <h4>@Model.EventDescription1</h4>
             <h4>@Model.EventDescription2</h4>
 
-
-            <button id="createCompanyButton" class="button">Book Event</button>
+            <br />
+            <a href="@Url.Action(actionName: "Book", controllerName: "Events", routeValues: new { id = Model.EventId})" class="button"><i class="fa fa-shopping-cart"></i>Book Now</a>
         </div>
         <div class="column-33">
             <img src="data:image;base64,@System.Convert.ToBase64String(Model.EventPicture)" width="435" height="471">

@@ -2,81 +2,154 @@
 
 @{
     ViewBag.Title = "Details";
+    var comments = (IEnumerable<Events.Models.EventComment>)ViewBag.Comments;
+    var ratingSum = ViewBag.RatingSum;
+    var ratingCount = ViewBag.RatingCount;
+    var EventIds = Model.EventId;
+
+    decimal rating = 0;
+    if (ratingCount > 0)
+    {
+        rating = (ratingSum / ratingCount);
+    }
+    var totalRating = decimal.Parse(rating.ToString());
 }
 
-<h2>Details</h2>
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-<div>
-    <h4>EventBooking</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Event.EventTitle)
-        </dt>
+    body {
+        margin: 0;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Event.EventTitle)
-        </dd>
+    .row:after {
+        content: "";
+        display: table;
+        clear: both
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerName)
-        </dt>
+    .column-66 {
+        float: left;
+        width: 66.66666%;
+        padding: 20px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.CustomerName)
-        </dd>
+    .column-33 {
+        float: left;
+        width: 33.33333%;
+        padding: 20px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CustomerSurname)
-        </dt>
+    .large-font {
+        font-size: 48px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.CustomerSurname)
-        </dd>
+    .button {
+        border: none;
+        color: white;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #04AA6D;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
+    .xlarge-font {
+        font-size: 64px
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
+    .commentBox {
+        background-color: #efefef;
+        padding: 10px;
+        border-radius: 10px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdNumber)
-        </dt>
+    .starFade {
+        background-image: url('/Images/StarFade.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+        cursor: pointer;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.IdNumber)
-        </dd>
+    .starFadeN {
+        background-image: url('/Images/StarFade.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
+    .starGlow {
+        background-image: url('/Images/starglow.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+        cursor: pointer;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
+    .starGlowN {
+        background-image: url('/Images/starglow.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+    }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateBooked)
-        </dt>
+<h2 class="text-center">Event Details</h2>
+@if (Model.DateBooked.AsDateTime().Subtract(Model.Event.EndDate.AsDateTime()).TotalDays < 0)
+{
+    <h2 class="text-center text-success">This Ticket is Still Valid</h2>
+}
+else
+{
+    <h2 class="text-center text-warning">This Ticket is No Longer Valid</h2>
+}
 
-        <dd>
-            @Html.DisplayFor(model => model.DateBooked)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TicketNumber)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.TicketNumber)
-        </dd>
+<!-- The App Section -->
+<div class="container">
+    <div class="row">
+        <div class="column-66">
+            <h1 class="xlarge-font"><b>@Model.Event.EventName</b></h1>
+            <h1 class="large-font" style="color:MediumSeaGreen;"><b>Price: &#82;@Model.Event.EventPrice</b></h1>
+            <p><span style="font-size:36px">Location: @Model.Event.EventLocation.</span></p>
+            <h4>@Model.Event.EventDescription1</h4>
+            <h4>@Model.Event.EventDescription2</h4>
 
-    </dl>
+            <br />            
+            <a href="@Url.Action(actionName: "Print", controllerName: "EventBookings", routeValues: new { id = Model.EventBookingId})" class="button"><i class="fa fa-shopping-cart"></i>Download Invoice</a>
+        </div>
+        <div class="column-33">
+            <img src="data:image;base64,@System.Convert.ToBase64String(Model.Event.EventPicture)" width="435" height="471">
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EventBookingId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+
+
+<!-- Clarity Section -->
+<div class="container" style="background-color:#f1f1f1">
+    <div class="row">
+        <div class="column-33">
+            <img src="data:image;base64,@System.Convert.ToBase64String(Model.Event.EventPicture)" alt="App" width="300" height="300">
+        </div>
+        <div class="column-66">
+            <h1 class="large-font"><b>@Model.Event.EventName</b></h1>
+            <h1 class="medium-font" style="color:green;"><b>Booked on @Model.DateBooked</b></h1>
+            <p><span style="font-size:24px">Event Date: @Model.Event.EndDate.AsDateTime().ToString("dddd, dd MMMM yyyy")</span>  </p>
+            <p>@Model.Event.EventDescription1</p>
+            <br />
+            @if (Model.DateBooked.AsDateTime().Subtract(Model.Event.EndDate.AsDateTime()).TotalDays < 0)
+            {
+                <a href="@Url.Action(actionName: "QRCoder", controllerName: "EventBookings", routeValues: new { id = Model.EventBookingId})" class="button"><i class="fa fa-shopping-cart"></i>Print QR Code</a>
+            }
+            <br />
+
+        </div>
+    </div>
+</div>
+<br />
