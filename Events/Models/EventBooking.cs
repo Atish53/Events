@@ -12,10 +12,9 @@ namespace Events.Models
         public int EventBookingId { get; set; }
         public int EventId { get; set; }
 
-        public string CustomerName { get; set; }
-        public string CustomerSurname { get; set; }
+        public string CustomerName { get; set; }       
         public string Address { get; set; }
-        public string IdNumber { get; set; }
+       
         public string PhoneNumber { get; set; }
         public string DateBooked { get; set; }        
 

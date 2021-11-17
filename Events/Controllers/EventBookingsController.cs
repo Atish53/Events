@@ -21,38 +21,7 @@ namespace Events.Controllers
             var eventBookings = db.EventBookings.Include(e => e.Event);
             return View(await eventBookings.ToListAsync());
         }
-
-
-        // GET: Events/Edit/5
-        public async Task<ActionResult> Book(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Event @event = await db.Events.FindAsync(id);
-            if (@event == null)
-            {
-                return HttpNotFound();
-            }
-            return View(@event);
-        }
-
-        // POST: Events/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Book([Bind(Include = "EventId,Title,EventPicture,Name,Description,TicketsRemaining,Price,Location,isActive")] Event @event)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(@event).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(@event);
-        }
+                       
 
         // GET: EventBookings/Details/5
         public async Task<ActionResult> Details(int? id)
