@@ -20,6 +20,9 @@ namespace Events.Models
 
         public string TicketNumber { get; set; }
 
+        public bool isCheckedIn { get; set; }
+        public string CheckInTime { get; set; }
+
         public virtual Event Event { get; set; }
     }
 }

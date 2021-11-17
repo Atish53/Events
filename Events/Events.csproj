@@ -200,6 +200,10 @@
     <Compile Include="Migrations\202111170304544_Sr.Designer.cs">
       <DependentUpon>202111170304544_Sr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111170516411_CheckIn.cs" />
+    <Compile Include="Migrations\202111170516411_CheckIn.Designer.cs">
+      <DependentUpon>202111170516411_CheckIn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
@@ -298,6 +302,7 @@
     <Content Include="Views\EventComments\Index.cshtml" />
     <Content Include="Views\Manage\MyEvents.cshtml" />
     <Content Include="Views\EventBookings\Details.cshtml" />
+    <Content Include="Views\EventBookings\AlreadyConfirmed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111170304544_Sr.resx">
       <DependentUpon>202111170304544_Sr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111170516411_CheckIn.resx">
+      <DependentUpon>202111170516411_CheckIn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -26,7 +26,13 @@ namespace Events.Controllers
             var eventBookings = db.EventBookings.Include(e => e.Event);
             return View(await eventBookings.ToListAsync());
         }
-                       
+
+        // GET: EventBookings
+        public async Task<ActionResult> AlreadyConfirmed()
+        {            
+            return View();
+        }
+
 
         // GET: EventBookings/Details/5
         public async Task<ActionResult> Details(int? id)
@@ -171,11 +177,29 @@ namespace Events.Controllers
             return View();        
         }
 
+        
+        public async Task<ActionResult> CheckIn(int id)
+        {            
+            EventBooking eventBooking = await db.EventBookings.FindAsync(id);
+
+            if (eventBooking.isCheckedIn == true)
+            {
+                return RedirectToAction("AlreadyConfirmed");
+            }
+            else
+            {
+                eventBooking.CheckInTime = DateTime.Now.ToString();
+                eventBooking.isCheckedIn = true;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Details" + "/" + id);
+            }            
+        } 
+
         public async Task<ActionResult> QRCoder(int id) //Event Booking - id is the Event Id... Booking is stored to the EventBookings Table
         {
             EventBooking eventBooking = await db.EventBookings.FindAsync(id);
 
-            string code = eventBooking.TicketNumber;
+            string code = "http://2021grp40-21529840.azurewebsites.net/EventBookings/CheckIn/" + id;
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
             QRCodeData qrCodeData = qrGenerator.CreateQrCode(code, QRCodeGenerator.ECCLevel.Q);
             QRCode qrCode = new QRCode(qrCodeData);
