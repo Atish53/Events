@@ -2,113 +2,169 @@
 
 @{
     ViewBag.Title = "Details";
+    var comments = (IEnumerable<Events.Models.EventComment>)ViewBag.Comments;
+    var ratingSum = ViewBag.RatingSum;
+    var ratingCount = ViewBag.RatingCount;
+    var EventIds = Model.EventId;
+
+    decimal rating = 0;
+    if (ratingCount > 0)
+    {
+        rating = (ratingSum / ratingCount);
+    }
+    var totalRating = decimal.Parse(rating.ToString());
 }
 
-<h2>Details</h2>
+<style>
+    * {
+        box-sizing: border-box;
+    }
 
-<div>
-    <h4>Event</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.EventCategory.EventCategoryName)
-        </dt>
+    body {
+        margin: 0;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.EventCategory.EventCategoryName)
-        </dd>
+    .row:after {
+        content: "";
+        display: table;
+        clear: both
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EventTitle)
-        </dt>
+    .column-66 {
+        float: left;
+        width: 66.66666%;
+        padding: 20px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.EventTitle)
-        </dd>
+    .column-33 {
+        float: left;
+        width: 33.33333%;
+        padding: 20px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EventPicture)
-        </dt>
+    .large-font {
+        font-size: 48px;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.EventPicture)
-        </dd>
+    .button {
+        border: none;
+        color: white;
+        padding: 14px 28px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #04AA6D;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EventName)
-        </dt>
+    .xlarge-font {
+        font-size: 64px
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.EventName)
-        </dd>
+    .commentBox {
+        background-color: #efefef;
+        padding: 10px;
+        border-radius: 10px;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EventDescription1)
-        </dt>
+    .starFade {
+        background-image: url('/Images/StarFade.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+        cursor: pointer;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.EventDescription1)
-        </dd>
+    .starFadeN {
+        background-image: url('/Images/StarFade.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EventDescription2)
-        </dt>
+    .starGlow {
+        background-image: url('/Images/starglow.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+        cursor: pointer;
+    }
 
-        <dd>
-            @Html.DisplayFor(model => model.EventDescription2)
-        </dd>
+    .starGlowN {
+        background-image: url('/Images/starglow.gif');
+        min-width: 30px;
+        min-height: 30px;
+        display: inline-block;
+    }
+</style>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EventLocation)
-        </dt>
+<h2 class="text-center">Event Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.EventLocation)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
+<!-- The App Section -->
+<div class="container">
+    <div class="row">
+        <div class="column-66">
+            <h1 class="xlarge-font"><b>@Model.EventName</b></h1>
+            <h1 class="large-font" style="color:MediumSeaGreen;"><b>Price: &#82;@Model.EventPrice</b></h1>
+            <p><span style="font-size:36px">Location: @Model.EventLocation.</span></p>
+            <h2>Tickets Remaining: @Model.TicketsRemaining</h2>
+            <h4>@Model.EventDescription1</h4>
+            <h4>@Model.EventDescription2</h4>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EventPrice)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EventPrice)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TicketsRemaining)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TicketsRemaining)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.isActive)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.isActive)
-        </dd>
-
-    </dl>
+            <button id="createCompanyButton" class="button">Book Event</button>
+        </div>
+        <div class="column-33">
+            <img src="data:image;base64,@System.Convert.ToBase64String(Model.EventPicture)" width="435" height="471">
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EventId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.EventId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+@foreach (var c in comments)
+{
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <i>@c.ThisDateTime</i>
+            <br />
+            @for (var i = 1; i <= c.Rating; i++)
+            {
+                <span class="starGlowN"></span>
+            }
+            @for (var i = (c.Rating + 1); i <= 5; i++)
+            {
+                <span class="starFadeN"></span>
+            }
+        </div>
+        <div class="col-md-9">
+            @Html.Raw(c.Comments.Replace("\n", "<br />"))
+
+
+        </div>
+    </div>
+}
+<hr />
+@Html.Partial("_CommentBox")
+
+@section Scripts{
+    <script>
+    function SCRate() {
+        for (var i = 1; i <= @totalRating; i++) {
+            $("#sRate" + i).attr('class', 'starGlowN');
+        }
+    }
+    $(function(){
+        SCRate();
+    });
+    </script>
+
+}
+
+

@@ -18,8 +18,9 @@ namespace Events.Migrations
         protected override void Seed(Events.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
-
-            /* var roleStore = new RoleStore<IdentityRole>(context);
+            //  This method will be called after migrating to the latest version.
+            /*
+            var roleStore = new RoleStore<IdentityRole>(context);
             var roleManager = new RoleManager<IdentityRole>(roleStore);
             var userStore = new UserStore<ApplicationUser>(context);
             var userManager = new UserManager<ApplicationUser>(userStore);
@@ -27,8 +28,10 @@ namespace Events.Migrations
             userManager.Create(user, "Admin123@");
             roleManager.Create(new IdentityRole { Name = "Admin" });
             roleManager.Create(new IdentityRole { Name = "Staff" });
-            userManager.AddToRole(user.Id, "Admin"); */
+            userManager.AddToRole(user.Id, "Admin");*/ 
 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
         }

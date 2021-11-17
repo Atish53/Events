@@ -43,6 +43,7 @@ namespace Events.Models
         public DbSet<Event> Events { get; set; }
         public DbSet<EventBooking> EventBookings { get; set; }        
         public DbSet<EventCategory> EventCategories { get; set; }
+        public DbSet<EventComment> EventComments { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

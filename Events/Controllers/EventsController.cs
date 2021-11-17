@@ -34,6 +34,26 @@ namespace Events.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.EventId = id.Value;
+
+            var comments = db.EventComments.Where(d => d.EventId.Equals(id.Value)).ToList();
+            ViewBag.Comments = comments;
+
+            var ratings = db.EventComments.Where(d => d.EventId.Equals(id.Value)).ToList();
+            if (ratings.Count() > 0)
+            {
+                var ratingSum = ratings.Sum(d => d.Rating.Value);
+                ViewBag.RatingSum = ratingSum;
+                var ratingCount = ratings.Count();
+                ViewBag.RatingCount = ratingCount;
+            }
+            else
+            {
+                ViewBag.RatingSum = 0;
+                ViewBag.RatingCount = 0;
+            }
+
             return View(@event);
         }
 

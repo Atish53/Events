@@ -61,6 +61,6 @@ namespace Events.Models
 
         public bool isActive { get; set; }
 
-        public List<EventBooking> EventBookings { get; set; }
+        public List<EventBooking> EventBookings { get; set; }       
     }
 }

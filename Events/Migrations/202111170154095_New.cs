@@ -3,7 +3,7 @@ namespace Events.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Ev : DbMigration
+    public partial class New : DbMigration
     {
         public override void Up()
         {
@@ -18,7 +18,7 @@ namespace Events.Migrations
                         Address = c.String(),
                         IdNumber = c.String(),
                         PhoneNumber = c.String(),
-                        DateBooked = c.DateTime(nullable: false),
+                        DateBooked = c.String(),
                         TicketNumber = c.String(),
                         ApplicationUser_Id = c.String(maxLength: 128),
                     })
@@ -58,6 +58,18 @@ namespace Events.Migrations
                         EventCategoryName = c.String(),
                     })
                 .PrimaryKey(t => t.EventCategoryId);
+            
+            CreateTable(
+                "dbo.EventComments",
+                c => new
+                    {
+                        CommentId = c.Int(nullable: false, identity: true),
+                        Comments = c.String(),
+                        ThisDateTime = c.DateTime(),
+                        EventId = c.Int(nullable: false),
+                        Rating = c.Int(),
+                    })
+                .PrimaryKey(t => t.CommentId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -159,6 +171,7 @@ namespace Events.Migrations
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.EventComments");
             DropTable("dbo.EventCategories");
             DropTable("dbo.Events");
             DropTable("dbo.EventBookings");

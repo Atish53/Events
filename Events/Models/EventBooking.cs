@@ -17,7 +17,7 @@ namespace Events.Models
         public string Address { get; set; }
         public string IdNumber { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime DateBooked { get; set; }
+        public string DateBooked { get; set; }        
 
         public string TicketNumber { get; set; }
 

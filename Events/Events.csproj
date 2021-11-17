@@ -170,21 +170,23 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\EventBookingsController.cs" />
     <Compile Include="Controllers\EventCategoriesController.cs" />
+    <Compile Include="Controllers\EventCommentsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202111161251050_Ev.cs" />
-    <Compile Include="Migrations\202111161251050_Ev.Designer.cs">
-      <DependentUpon>202111161251050_Ev.cs</DependentUpon>
+    <Compile Include="Migrations\202111170154095_New.cs" />
+    <Compile Include="Migrations\202111170154095_New.Designer.cs">
+      <DependentUpon>202111170154095_New.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EventBooking.cs" />
     <Compile Include="Models\EventCategory.cs" />
+    <Compile Include="Models\EventComment.cs" />
     <Compile Include="Models\IdentityExtensions.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -194,14 +196,18 @@
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-yeti.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min-yeti.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Image\W1.jpg" />
-    <Content Include="Image\W2.jpg" />
+    <Content Include="Images\StarFade.gif" />
+    <Content Include="Images\StarGlow.gif" />
+    <Content Include="Images\W1.jpg" />
+    <Content Include="Images\W2.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -264,6 +270,14 @@
     <Content Include="Views\EventBookings\Details.cshtml" />
     <Content Include="Views\EventBookings\Edit.cshtml" />
     <Content Include="Views\EventBookings\Index.cshtml" />
+    <Content Include="Views\Events\Book.cshtml" />
+    <Content Include="Views\EventBookings\Book.cshtml" />
+    <Content Include="Views\Shared\_CommentBox.cshtml" />
+    <Content Include="Views\EventComments\Create.cshtml" />
+    <Content Include="Views\EventComments\Delete.cshtml" />
+    <Content Include="Views\EventComments\Details.cshtml" />
+    <Content Include="Views\EventComments\Edit.cshtml" />
+    <Content Include="Views\EventComments\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -282,8 +296,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202111161251050_Ev.resx">
-      <DependentUpon>202111161251050_Ev.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202111170154095_New.resx">
+      <DependentUpon>202111170154095_New.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
